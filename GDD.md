@@ -1,6 +1,6 @@
 # Chef Rush
 
-**Game design document · v0.2 · Prototype proposal**
+**Game design document · v0.3 · Prototype proposal**
 
 Chef Rush is a cooperative downhill cooking game for 2–4 friends. Everyone rides down a mountain. One rider wears a torso-mounted pan and cooks while steering. The other riders split off to pick up ingredients and pass them to the chef at agreed meeting points. The crew serves roadside customers on the same descent. Use downhill bikes for the prototype.
 
@@ -13,6 +13,8 @@ Chef Rush is a cooperative downhill cooking game for 2–4 friends. Everyone rid
 | Genre | Online co-op party game with arcade downhill riding and light order management |
 | Players | 2–4 friends in private rooms |
 | Session | One 6–9 minute descent, plus lobby and results |
+| Engine | Unity |
+| Art direction | Stylized low-poly 3D, with *How to Fish* as a visual reference |
 | Platform | PC first, with keyboard and gamepad support |
 | View | Third-person chase camera for every rider, with different HUDs for chef and couriers |
 | Tone | Playful roadside food festival with expressive riders, wobbly cargo, and recoverable mishaps |
@@ -135,7 +137,7 @@ After the ready window, allow 3 seconds of overdone time before burning. Initial
 
 ## 8. Art and audio
 
-Use stylized 3D, chunky vehicle silhouettes, fabric awnings, bright painted road signs, and high-contrast ingredient shapes. Give the chef a distinct silhouette with a chest harness and front-mounted pan. Use a slightly offset chase camera and clear arm, steam, and heat cues to show cooking without obscuring the road. Distinguish routes with landmarks visible above the track so teammates can call them by name. Use original riders, roadside businesses, and festivals. Focus comedy on reactions, wobble, and cargo physics while keeping collisions and interactive objects visually reliable.
+Use stylized low-poly 3D, with *How to Fish* as a reference for the overall look. Give Chef Rush its own alpine food-festival identity with faceted terrain, chunky bikes, colorful stall awnings, and simple materials. Build route landmarks from bold shapes and reserve high contrast for signs, ingredients, and cooking cues so players can read them at speed. Give the chef a distinct silhouette with a chest harness and front-mounted pan. Use a slightly offset chase camera and clear arm, steam, and heat cues to show cooking without obscuring the road. Distinguish routes with landmarks visible above the track so teammates can call them by name. Use original riders, roadside businesses, and festivals. Focus comedy on reactions, wobble, and cargo physics while keeping collisions and interactive objects visually reliable.
 
 Layer light percussion and acoustic instruments under the descent. Use separate sound signatures for route warnings, successful handoffs, ready food, and service. Let the cooking cue cut through the mix without burying nearby road hazards. Give music, effects, and UI sound separate volume controls.
 
@@ -145,7 +147,7 @@ Layer light percussion and acoustic instruments under the descent. Use separate 
 - **Transactions:** validate route segment, proximity, speed difference, item ownership, and capacity on the host. Give interaction requests unique IDs so retries cannot duplicate ingredients or deliveries. Send reliable state changes for transfers and serving. Vehicle snapshots can be lossy.
 - **Run state:** lobby → countdown → descent → finish → results. Disable mid-run joins for the first release scope. Give a disconnected courier a short reclaim window. After it expires, future tickets use the smaller crew's schedule where feasible. If the chef disconnects and cannot reclaim the role after a short grace period, end the run and show the results accumulated so far. Host departure returns the group to its lobby flow. Host migration is deferred.
 - **Data:** define recipes, ingredient types, routes, pickup sockets, merge and service zones, ticket schedules, and tuning presets as editable assets. Log seed, role counts, ticket outcomes, and failed handoff reasons in development builds without recording chat.
-- **Engine selection:** open. Compare engine candidates against multiplayer iteration, vehicle prediction, spline authoring, input remapping, and PC build workflow. Prove the transfer online before committing to a production content pipeline.
+- **Engine:** Unity. Pin the editor and package versions in the project. Use prefabs for reusable riders, hazards, pickups, and customer stops, and ScriptableObjects for editable recipes and tuning. Validate the route authoring tools, keyboard and gamepad input, Windows build, and multiplayer transport in the prototype. The Unity version, render pipeline, and networking package are open decisions.
 - **Performance target:** 60 fps at 1080p on a representative midrange PC, with a stable simulation through four-player spills and transfers. Define specific reference hardware during the prototype.
 
 ## 10. Progression and replayability
@@ -195,6 +197,6 @@ Prioritize fixing missed information before increasing difficulty. Compare chef 
 - How soon can a new crew read and act on a second simultaneous ticket?
 - Which merge tolerances feel intentional under latency without requiring precise steering?
 - Should a disconnected chef be replaceable by a courier at a designated pullout in a later version?
-- Which visual theme, engine, and release scope fit the available team and budget?
+- Which Unity render pipeline and networking package fit the available team and target PCs?
 
 Treat player counts, tuning values, platform, business model, and production scope as working assumptions. Revise them against the vertical-slice playtests.

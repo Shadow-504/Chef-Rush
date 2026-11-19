@@ -8,7 +8,7 @@ Start with two online riders, one fork, one ingredient exchange, and one dish co
 
 | Person | Primary ownership | Regular handoff |
 | --- | --- | --- |
-| **A — Gameplay and networking** | Engine and builds, movement, multiplayer, inventory and cooking systems, saves and platform integration | Gives B editable route, recipe, and ticket assets. Gives C gameplay events and view state for UI, sound, and effects. |
+| **A — Gameplay and networking** | Unity project and builds, movement, multiplayer, inventory and cooking systems, saves and platform integration | Gives B editable route, recipe, and ticket assets. Gives C gameplay events and view state for UI, sound, and effects. |
 | **B — Game and level design** | Game rules, route layouts, timing, order schedules, progression, playtest coordination | Gives A system rules and acceptance cases. Gives C route landmarks, sign needs, content lists, and feedback priorities. |
 | **C — UI and audiovisual** | UX, HUD, menus, accessibility presentation, art direction, asset integration, SFX and VFX | Gives A interaction flows and cue requirements. Gives B reusable environment pieces and visual signage. |
 
@@ -19,13 +19,13 @@ These are proposed assignments. Map A, B, and C to teammates according to their 
 - Each task has a stable ID. Mark table tasks complete by replacing ☐ with ☑. Copy it into an issue with one owner and the acceptance condition. Split oversized items into subtasks as needed.
 - **After** identifies the task that needs to land before final integration. Design sketches, sample assets, and test cases can begin earlier.
 - Keep one main task active per person. Start with the first milestone, then re-estimate based on actual capacity and playtest findings.
-- Use engine primitives, placeholder sounds, and simple icons through the first handoff test. Engine, hosting provider, and production schedule are open decisions.
+- Use Unity primitives, placeholder sounds, and simple icons through the first handoff test. The Unity version, render pipeline, networking package, hosting provider, and production schedule are open decisions.
 
 ## M0 — Online downhill handoff prototype
 
 | ID | Owner | After | Task and acceptance |
 | --- | --- | --- | --- |
-| P01 | A | — | ☐ Choose an engine after checking PC builds, input, route splines, and network simulation. Set project structure, version control rules for binary assets, and a repeatable build command. Two teammates launch the same build on separate machines. |
+| P01 | A | — | ☐ Initialize the Unity project and pin the editor and package versions. Verify PC builds, keyboard and gamepad input, route splines, and network simulation. Set project structure, version control rules for Unity metadata and binary assets, and a repeatable build command. Two teammates launch the same build on separate machines. |
 | P02 | B | — | ☐ Specify chef and courier controls, chef and courier speed ranges, zone sizes, and the first handoff rules. Sketch a short route with two lanes and a shared merge. Define success, full-pouch, and missed-window examples. |
 | P03 | C | P02 | ☐ Add temporary bike and torso-pan silhouettes, offset follow camera framing, ingredient icons, merge marker, and handoff feedback. A player can tell which rider is the chef and which lane leads to the merge. |
 | P04 | A | P01, P02 | ☐ Implement gravity-driven forward motion, steering, brake, boost, branch selection, and safe reset. Both vehicles can reach the merge from either branch. |
@@ -44,7 +44,7 @@ These are proposed assignments. Map A, B, and C to teammates according to their 
 
 ### Gameplay, multiplayer, and data
 
-- [ ] **S01 · A · After P12** — Define editable data for ingredient types, recipes, routes, zones, pickups, and ticket schedules. Validate missing IDs, bad references, and invalid zone bounds when loading content.
+- [ ] **S01 · A · After P12** — Define editable Unity data for ingredient types, recipes, routes, zones, pickups, and ticket schedules. Use ScriptableObjects for reusable definitions and prefabs for scene objects. Validate missing IDs, bad references, and invalid zone bounds when loading content.
 - [ ] **S02 · A · After S01** — Implement two-slot courier cargo, chef ingredient pouch and plated-dish capacity, cargo selection, discard, and simultaneous transfers. Test full destinations and two couriers attempting to transfer at once.
 - [ ] **S03 · A · After S02** — Expand the wearable-pan loop with atomic ingredient loading, ready/overdone/burnt states, and plated-dish storage. Reproduce each outcome while steering the bike with keyboard and gamepad.
 - [ ] **S04 · A · After S03** — Implement ticket announcement, timed customer lanes, serving, expiration, and finish conditions. Test wrong dishes, later compatible customers, and duplicate serve attempts.
@@ -67,7 +67,7 @@ These are proposed assignments. Map A, B, and C to teammates according to their 
 - [ ] **S15 · C · After P12** — Wireframe join, role select, briefing, in-run role HUDs, and results. Test reading the next order and meeting point while looking at the road. Specify controller focus and all interaction prompt states.
 - [ ] **S16 · C · After S06, S15** — Build menus, room codes or invite flow, role selection, countdown, briefing, and results. Show replay, role swap, and exit with clear controller navigation.
 - [ ] **S17 · C · After S05, S08, S15** — Build the chef's ingredient pouch, pan heat indicator, and plated-dish slots, and ticket timeline. Build the courier's cargo selection, supply signs, and speed-match cues. Implement shared pings, teammate markers, and success and failure prompts.
-- [ ] **S18 · C · After S10** — Build a small modular art kit for road pieces, terrain dressing, signs, customer stalls, props, bikes, riders, torso harness, pan, and ingredients. Implement rider lean, wobble, and readable load/plate motions. Check branch and customer silhouettes at riding speed.
+- [ ] **S18 · C · After S10** — Build an original low-poly style sample for one Festival Pass bend using the GDD’s *How to Fish* reference. Use the sample to establish the palette, faceted silhouettes, and simple materials, then build a modular kit for roads, terrain, signs, customer stalls, bikes, riders, harness, pan, and ingredients. Implement rider lean, wobble, and readable load/plate motions. Check branch and customer silhouettes at riding speed.
 - [ ] **S19 · C · After S08, S17** — Source or produce SFX for road surface, brake, boost, spill, pickup, handoff, cooking, warning, service, and UI. Implement camera-relative or positional playback as appropriate. Test that ready and burn cues are audible over riding and music.
 - [ ] **S20 · C · After S08, S17** — Implement VFX for merge marking, pickup and handoff trails, dust, spills, steam, smoke, and delivery. Distinguish successful actions by host confirmation. Verify that effects leave road signs and prompts legible.
 - [ ] **S21 · C · After S16, S17, S19, S20** — Add UI scaling, high-contrast symbol and color pairs, cue captions, reduced shake and motion options, field-of-view and volume controls. Review the handoff and serve flows with color and audio cues removed separately.
@@ -119,7 +119,7 @@ Public matchmaking, dedicated servers, split-screen, solo bots, built-in voice, 
 
 ## First work cycle
 
-1. **A:** Set up the engine project and share a launchable build. Implement controllable chef and courier bike movement.
+1. **A:** Set up the Unity project and share a launchable build. Implement controllable chef and courier bike movement.
 2. **B:** Draw the fork and specify the pickup and merge windows. Graybox travel paths as soon as movement works.
 3. **C:** Prototype the follow camera framing, the torso pan silhouette, and handoff prompts. Use temporary icons and sounds to test the complete exchange.
 4. **All:** Test one exchange, one cook through a bend, and one delivery on two machines. Log whether failures come from route reading, timing, interaction rules, or replication. Pick the next fixes before committing to more content.
