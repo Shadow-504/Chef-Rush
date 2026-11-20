@@ -26,9 +26,9 @@ namespace ChefRush
                 target.ResetCompleted -= SnapToTarget;
         }
 
-        private void LateUpdate() => Follow(1f - Mathf.Exp(-followSharpness * Time.deltaTime));
+        private void LateUpdate() => Follow(1f - Mathf.Exp(-followSharpness * Time.deltaTime)); //
 
-        private void SnapToTarget() => Follow(1f);
+        private void SnapToTarget() => Follow(1f); //
 
         private void Follow(float blend)
         {
@@ -38,10 +38,10 @@ namespace ChefRush
             Transform rider = target.transform;
             Vector3 followOffset = offset - Vector3.right * target.Steer * carveOffset;
             Vector3 position = Vector3.Lerp(transform.position, rider.TransformPoint(followOffset), blend);
-            Vector3 lookPoint = rider.position + rider.forward * lookAhead;
-            Quaternion rotation = Quaternion.LookRotation(lookPoint - position, Vector3.up);
-            rotation *= Quaternion.AngleAxis(-target.Steer * carveRoll, Vector3.forward);
-            transform.SetPositionAndRotation(position, Quaternion.Slerp(transform.rotation, rotation, blend));
+            //Vector3 lookPoint = rider.position + rider.forward * lookAhead;
+            //Quaternion rotation = Quaternion.LookRotation(lookPoint - position, Vector3.up);
+            //rotation *= Quaternion.AngleAxis(-target.Steer * carveRoll, Vector3.forward);
+            transform.position = position;
         }
     }
 }

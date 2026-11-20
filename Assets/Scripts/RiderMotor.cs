@@ -2,20 +2,16 @@ using UnityEngine;
 
 namespace ChefRush
 {
-    public enum RiderRole
-    {
-        Chef,
-        Courier
-    }
+
 
     [RequireComponent(typeof(CharacterController))]
     public sealed class RiderMotor : MonoBehaviour
     {
-        [SerializeField] private RiderRole role;
+
         [SerializeField, Min(0.1f)] private float minimumSpeed = 6f;
         [SerializeField, Min(0.1f)] private float cruiseSpeed = 12f;
-        [SerializeField, Min(0.1f)] private float chefBoostSpeed = 17f;
-        [SerializeField, Min(0.1f)] private float courierBoostSpeed = 21f;
+        [SerializeField, Min(0.1f)] private float maxAcceledSpeed = 17f;
+
         [SerializeField, Min(0.1f)] private float acceleration = 8f;
         [SerializeField, Min(0.1f)] private float deceleration = 16f;
         [SerializeField, Range(0f, 70f)] private float maxCarveAngle = 38f;
@@ -28,7 +24,7 @@ namespace ChefRush
         private float driveSpeed;
         private float verticalSpeed;
 
-        public RiderRole Role { get => role; set => role = value; }
+
         public Vector3 Velocity { get; private set; }
         public bool IsGrounded { get; private set; }
         public float Steer { get; private set; }
@@ -43,7 +39,7 @@ namespace ChefRush
             driveSpeed = cruiseSpeed;
         }
 
-        public void Simulate(float steer, float boost, float brake, float deltaTime)
+        public void Simulate(float steer, float accel, float deltaTime)
         {
             if (deltaTime <= 0f || !isActiveAndEnabled || !controller.enabled)
                 return;
@@ -62,10 +58,10 @@ namespace ChefRush
             float yaw = Mathf.MoveTowardsAngle(transform.eulerAngles.y, heading + Steer * maxCarveAngle, turnRate * deltaTime);
             transform.rotation = Quaternion.Euler(0f, yaw, 0f);
             Vector3 forward = Vector3.ProjectOnPlane(transform.forward, GroundNormal).normalized;
-            float topSpeed = Mathf.Max(cruiseSpeed, role == RiderRole.Courier ? courierBoostSpeed : chefBoostSpeed);
-            float targetSpeed = brake > 0f
-                ? Mathf.Lerp(cruiseSpeed, Mathf.Min(minimumSpeed, cruiseSpeed), brake)
-                : Mathf.Lerp(cruiseSpeed, topSpeed, boost);
+            float topSpeed = Mathf.Max(cruiseSpeed, maxAcceledSpeed);
+            float targetSpeed = accel > 0f
+                ? Mathf.Lerp(cruiseSpeed, topSpeed, accel) 
+                : Mathf.Lerp(cruiseSpeed, Mathf.Min(minimumSpeed, cruiseSpeed), -accel);
             float speedChangeRate = targetSpeed < driveSpeed ? deceleration : acceleration;
             driveSpeed = Mathf.MoveTowards(driveSpeed, targetSpeed, speedChangeRate * deltaTime);
 

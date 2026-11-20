@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "InputSystem_Actions",
     "maps": [
         {
@@ -489,18 +490,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Boost",
+                    "name": "Accel",
                     "type": "Value",
                     "id": "c8a5378a-5754-41cb-8740-b98b5d000003",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Brake",
-                    "type": "Value",
-                    "id": "c8a5378a-5754-41cb-8740-b98b5d000004",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
@@ -510,7 +502,7 @@
                     "name": "Reset",
                     "type": "Button",
                     "id": "c8a5378a-5754-41cb-8740-b98b5d000005",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -540,6 +532,17 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "negative",
+                    "id": "3b33b22b-8623-412f-8b52-e72213222598",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Steer",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "positive",
                     "id": "c8a5378a-5754-41cb-8740-b98b5d000008",
                     "path": "<Keyboard>/d",
@@ -551,37 +554,15 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "c8a5378a-5754-41cb-8740-b98b5d000009",
-                    "path": "<Gamepad>/leftStick/x",
+                    "name": "positive",
+                    "id": "b4d27513-5c46-478c-a17d-a1bffce836bd",
+                    "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "Keyboard&Mouse",
                     "action": "Steer",
                     "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c8a5378a-5754-41cb-8740-b98b5d00000a",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Boost",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c8a5378a-5754-41cb-8740-b98b5d00000c",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Brake",
-                    "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
@@ -595,15 +576,59 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "c8a5378a-5754-41cb-8740-b98b5d00000f",
-                    "path": "<Gamepad>/buttonNorth",
+                    "name": "1D Axis",
+                    "id": "767501b4-b5bc-4e75-aee3-8cf39280226a",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Reset",
-                    "isComposite": false,
+                    "groups": "",
+                    "action": "Accel",
+                    "isComposite": true,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "27fd1f83-6518-4df9-a7f5-4081460236cd",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Accel",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "negative",
+                    "id": "00c6a006-1a50-412a-9517-39dd0056da0e",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Accel",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "ea1968be-9813-4101-8fc3-8e1ff5fa36c6",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Accel",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "93e99ea0-d39e-473f-9215-bd107901bc31",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Accel",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },
